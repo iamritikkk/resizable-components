@@ -1,0 +1,36 @@
+services:
+
+  # frontend app
+  frontend:
+    build:
+      context: frontend/.
+    container_name: resizable_frontend
+    ports:
+      - 8080:8080
+
+  # backend api
+  api:
+    build:
+      context: backend/.
+    container_name: resizable_api
+    ports:
+      - 3000:3000
+    deploy:
+      mode: replicated
+      replicas: 1
+
+    # waiting for the deployment of the db
+    depends_on:
+      - mongo
+
+    # loading envs from .env
+    env_file:
+      - .env
+
+  # mongo db
+  mongo:
+    image: mongo
+    container_name: resizable_mongo
+
+    volumes:
+      - "./mongodb:/data/db"
