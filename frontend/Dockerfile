@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:latest as prod
 
 COPY --from=node /app/dist /usr/share/nginx/html
-COPY --from=node /app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80/tcp
 
