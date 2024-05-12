@@ -9,8 +9,8 @@ export class ResizableComponents {
   static async addNewEntry(req, res, next) {
     const start = performance.now();
     try {
-      const { content } = req.body;
-      const data = await ResizableModel.create({ content });
+      const { content, componentId } = req.body;
+      const data = await ResizableModel.create({ content, componentId });
       const end = performance.now();
       const executionTime = end - start;
       return res.status(201).json({ status: `created`, data, executionTime });
@@ -44,11 +44,12 @@ export class ResizableComponents {
     try {
       const { content } = req.body;
       const { id } = req.params;
-      const data = await ResizableModel.findByIdAndUpdate(
-        id,
+
+      const data = await ResizableModel.findOneAndUpdate(
+        { componentId: id },
         { content },
-        { new: true }
-      ).lean();
+        { new: true } // to return the updated data
+      ).lean(); // to return the plain object
       const end = performance.now();
       const executionTime = end - start;
       res.status(200).json({ status: `updated`, data, executionTime });

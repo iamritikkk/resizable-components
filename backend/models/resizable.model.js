@@ -4,6 +4,12 @@ const ResizableSchema = new mongoose.Schema(
   {
     content: {
       type: String,
+      required: true,
+    },
+
+    componentId: {
+      type: Number,
+      required: true,
     },
   },
   { timestamps: true }

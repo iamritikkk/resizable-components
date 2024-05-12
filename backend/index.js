@@ -14,7 +14,7 @@ dotenv.config();
 // port and mongo uri
 const PORT = process.env.PORT ?? 3000;
 const MONGO =
-  process.env.MONGO_URI ?? "mongodb://localhost:27017/resizable_components";
+  process.env.MONGO_URIll ?? "mongodb://localhost:27017/resizable_components";
 
 //  setting up the server
 const server = new Server({ port: PORT });
